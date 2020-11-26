@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+useEffect(() => {
+  getRestaurants();
+});
+
+const getRestaurants = () => {
+  const results = fetch(
+    'https://code-challenge.spectrumtoolbox.com/api/restaurants',
+    {
+      headers: {
+        Authorization: 'Api-Key q3MNxtfep8Gt',
+      },
+    }
+  );
+  console.log('RESULTS', results);
+};
+
 function App() {
   return (
     <div className="App">
