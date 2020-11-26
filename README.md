@@ -27,3 +27,26 @@ For this challenge we would like you to create a React application that pulls re
 - A user should be able to combine filters and search.
   - The user should be able to turn filters on and off while a search value is present.
 - If any of the filters do not return any restaurants, the UI should indicate that no results were found.
+
+## Requirements
+
+- Deployed application
+- No use of third-party component libraries for the table/filter/search.
+- Using Create-React-App or Next.js as a starter kit is okay.
+- Well organized file structure
+- Descriptive naming conventions
+- DRY code that is readable and production ready
+- Reusable components
+- Sound logic for how the filters are architected
+- Styling follows a convention/pattern and is well organized
+- Full Git history with atomic commits
+
+## Stretch goals:
+
+- CI / CD
+- Unit tests
+- TypeScript
+- Table row click shows additional information
+- User can sort the data by name and state
+- Add filter for attire
+- Feel free to get creative!
