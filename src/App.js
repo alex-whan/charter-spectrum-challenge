@@ -2,19 +2,27 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const getRestaurants = async () => {
-  const results = await fetch(
+const getRestaurants = () => {
+  const response = fetch(
     'https://code-challenge.spectrumtoolbox.com/api/restaurants',
     {
       headers: {
         Authorization: 'Api-Key q3MNxtfep8Gt',
       },
     }
-  );
-  console.log('RESULTS', results);
+  )
+    .then(res => res.json())
+    .then(data => {
+      console.log('DATA', data);
+    });
+  // console.log('RESULTS', response.json());
 };
 
 function App() {
+  useEffect(() => {
+    getRestaurants();
+  });
+
   return (
     <div className="App">
       <header className="App-header">
