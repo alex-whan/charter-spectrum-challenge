@@ -18,7 +18,7 @@ const getRestaurants = () => {
   // console.log('RESULTS', response.json());
 };
 
-function App() {
+const App = () => {
   useEffect(() => {
     getRestaurants();
   });
@@ -41,6 +41,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
