@@ -2,12 +2,8 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-useEffect(() => {
-  getRestaurants();
-});
-
-const getRestaurants = () => {
-  const results = fetch(
+const getRestaurants = async () => {
+  const results = await fetch(
     'https://code-challenge.spectrumtoolbox.com/api/restaurants',
     {
       headers: {
