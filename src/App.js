@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -14,6 +14,7 @@ const getRestaurants = () => {
     .then(res => res.json())
     .then(data => {
       console.log('DATA', data);
+      // May need to refactor as async/await
     });
 };
 
