@@ -15,7 +15,6 @@ const getRestaurants = () => {
     .then(data => {
       console.log('DATA', data);
     });
-  // console.log('RESULTS', response.json());
 };
 
 const App = () => {
