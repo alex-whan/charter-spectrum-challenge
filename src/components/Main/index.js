@@ -5,22 +5,22 @@ const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
 
   const getRestaurants = async () => {
-    const response = fetch(
+    const response = await fetch(
       'https://code-challenge.spectrumtoolbox.com/api/restaurants',
       {
         headers: {
           Authorization: 'Api-Key q3MNxtfep8Gt',
         },
       }
-    )
-      .then(res => res.json())
-      .then(data => {
-        console.log('DATA', data);
-        setRestaurants(data);
-      });
-    // const data = await response.json();
-    // console.log('DATA???', data);
-    // setRestaurants(data);
+    );
+    // .then(res => res.json())
+    // .then(data => {
+    //   console.log('DATA', data);
+    //   setRestaurants(data);
+    // });
+    const data = await response.json();
+    console.log('DATA???', data);
+    setRestaurants(data);
   };
 
   useEffect(() => {
