@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const List = ({ props }) => {
   console.log('WHAT IS THIS?', props);
+
+  const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const restaurants = props.sort((a, b) => (a.name > b.name ? 1 : -1));
 
   return (
