@@ -9,8 +9,6 @@ const List = ({ props }) => {
   return (
     <>
       <h2>Restaurants:</h2>
-      <button>Filter by State</button>
-      <button>Filter by Genre</button>
       <table>
         <tbody>
           {restaurants.map(restaurant => {

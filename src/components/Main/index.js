@@ -19,6 +19,20 @@ const Main = () => {
     setRestaurants(alphabetizedData);
   };
 
+  const filterState = state => {
+    const filtered = restaurants.filter(
+      restaurant => restaurant.state === state
+    );
+    setRestaurants(filtered);
+  };
+
+  const filterGenre = genre => {
+    const filtered = restaurants.filter(
+      restaurant => restaurant.genre === genre
+    );
+    setRestaurants(filtered);
+  };
+
   useEffect(() => {
     getRestaurants();
     console.log('RESTAURANTS??', restaurants);
@@ -27,6 +41,8 @@ const Main = () => {
   return (
     <>
       <h1>Main component!</h1>
+      <button>Filter by State</button>
+      <button>Filter by Genre</button>
       <List props={restaurants} />
     </>
   );
