@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { STATES } from './constants/states';
+import './Dropdown.css';
 
 const Dropdown = () => {
   const dropdownRef = useRef(null);
@@ -25,19 +26,17 @@ const Dropdown = () => {
   }, [isActive]);
 
   return (
-    <div>
-      <button onClick={onClick}>Filter by State</button>
-      <nav>
+    <div className="menu-container">
+      <button onClick={onClick} lassName="menu-trigger">
+        Filter by State
+      </button>
+      <nav
+        ref={dropdownRef}
+        className={`menu ${isActive ? 'active' : 'inactive'}`}
+      >
         <ul>
           {STATES.map(state => {
-            return (
-              <li
-                key={state.id}
-                className={`menu ${isActive ? 'active' : 'inactive'}`}
-              >
-                {state.code}
-              </li>
-            );
+            return <li key={state.id}>{state.code}</li>;
           })}
         </ul>
       </nav>
