@@ -7,18 +7,24 @@ const List = ({ props }) => {
   return (
     <>
       <h2>Restaurants:</h2>
-      {restaurants.map(restaurant => {
-        return (
-          <tr key={restaurant.telephone}>
-            <td>{restaurant.name}</td>
-            <td>
-              {restaurant.city}, {restaurant.state}
-            </td>
-            <td>{restaurant.telephone}</td>
-            <td>{restaurant.genre}</td>
-          </tr>
-        );
-      })}
+      <button>Filter by State</button>
+      <button>Filter by Genre</button>
+      <table>
+        <tbody>
+          {restaurants.map(restaurant => {
+            return (
+              <tr key={restaurant.telephone}>
+                <td>{restaurant.name}</td>
+                <td>
+                  {restaurant.city}, {restaurant.state}
+                </td>
+                <td>{restaurant.telephone}</td>
+                <td>{restaurant.genre}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 };
