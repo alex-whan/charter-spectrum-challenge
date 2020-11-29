@@ -2,15 +2,43 @@ import React from 'react';
 
 const List = ({ props }) => {
   console.log('WHAT IS THIS?', props);
+  // <ul>
+  //   {props.map(restaurant => {
+  //     return <li>{restaurant.name}</li>;
+  //   })}
+  // </ul>;
+
+  // {
+  //   props.map(restaurant => {
+  //     return (
+  //       <tr key={restaurant.name}>
+  // <td>{restaurant.name}</td>
+  // <td>{restaurant.address1}</td>
+  // <td>
+  //   {restaurant.city}, {restaurant.state}
+  // </td>
+  // <td>{restaurant.genre}</td>
+  //       </tr>
+  //     );
+  //   });
+  // }
 
   return (
     <>
       <h2>Restaurants:</h2>
-      <ul>
-        {props.map(restaurant => {
-          return <li>{restaurant.name}</li>;
-        })}
-      </ul>
+      {props.map(restaurant => {
+        return (
+          <tr key={restaurant.telephone}>
+            <td>{restaurant.name}</td>
+            <td>{restaurant.name}</td>
+            <td>{restaurant.address1}</td>
+            <td>
+              {restaurant.city}, {restaurant.state}
+            </td>
+            <td>{restaurant.genre}</td>
+          </tr>
+        );
+      })}
     </>
   );
 };
