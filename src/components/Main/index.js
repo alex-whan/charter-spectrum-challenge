@@ -13,13 +13,8 @@ const Main = () => {
         },
       }
     );
-    // .then(res => res.json())
-    // .then(data => {
-    //   console.log('DATA', data);
-    //   setRestaurants(data);
-    // });
+
     const data = await response.json();
-    console.log('DATA???', data);
     setRestaurants(data);
   };
 
