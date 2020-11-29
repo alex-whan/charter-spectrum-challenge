@@ -1,6 +1,6 @@
 import React from 'react';
 
-const List = ({ props }) => {
+const Table = ({ props }) => {
   console.log('WHAT IS THIS - PROPS?', props);
   // const restaurants = props.sort((a, b) => (a.name > b.name ? 1 : -1));
   const restaurants = props;
@@ -29,7 +29,7 @@ const List = ({ props }) => {
   );
 };
 
-export default List;
+export default Table;
 
 // address1: "201 Waterfront St"
 // attire: "business casual"

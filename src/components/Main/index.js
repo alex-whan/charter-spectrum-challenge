@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import List from '../List';
+import Table from '../Table';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -43,7 +43,7 @@ const Main = () => {
       <h1>Main component!</h1>
       <button>Filter by State</button>
       <button>Filter by Genre</button>
-      <List props={restaurants} />
+      <Table props={restaurants} />
     </>
   );
 };
