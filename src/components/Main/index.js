@@ -15,7 +15,8 @@ const Main = () => {
     );
 
     const data = await response.json();
-    setRestaurants(data);
+    const alphabetizedData = data.sort((a, b) => (a.name > b.name ? 1 : -1));
+    setRestaurants(alphabetizedData);
   };
 
   useEffect(() => {

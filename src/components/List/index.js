@@ -2,7 +2,9 @@ import React from 'react';
 
 const List = ({ props }) => {
   console.log('WHAT IS THIS - PROPS?', props);
-  const restaurants = props.sort((a, b) => (a.name > b.name ? 1 : -1));
+  // const restaurants = props.sort((a, b) => (a.name > b.name ? 1 : -1));
+  const restaurants = props;
+  console.log('WHAT IS THIS - RESTAURANTS?', restaurants);
 
   return (
     <>
