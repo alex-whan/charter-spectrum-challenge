@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '../List';
 
 const Main = () => {
+  const [restaurants, setRestaurants] = useState([]);
+
   const getRestaurants = () => {
     const response = fetch(
       'https://code-challenge.spectrumtoolbox.com/api/restaurants',
