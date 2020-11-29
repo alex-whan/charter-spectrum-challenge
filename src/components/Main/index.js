@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Table from '../Table';
-import STATES from '../Dropdown/constants/states';
+import Dropdown from '../Dropdown';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -42,6 +42,7 @@ const Main = () => {
   return (
     <>
       <h1>Main component!</h1>
+      <Dropdown />
       <Table props={restaurants} />
     </>
   );

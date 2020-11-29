@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { STATES } from './constants/states';
 
 const Dropdown = () => {
@@ -10,7 +10,11 @@ const Dropdown = () => {
     <div>
       <button onClick={onClick}>Filter by State</button>
       <nav>
-        <ul></ul>
+        <ul>
+          {STATES.map(state => {
+            return <li key={state.id}>{state.code}</li>;
+          })}
+        </ul>
       </nav>
     </div>
   );
