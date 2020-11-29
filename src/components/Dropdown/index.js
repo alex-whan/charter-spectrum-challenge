@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import './Dropdown.css';
 
 const Dropdown = props => {
-  console.log('PROP STATES??', { props });
   const opts = props.opts;
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
@@ -28,7 +27,7 @@ const Dropdown = props => {
 
   return (
     <div className="menu-container">
-      <button onClick={onClick} lassName="menu-trigger">
+      <button onClick={onClick} className="menu-trigger">
         Filter by State
       </button>
       <nav
