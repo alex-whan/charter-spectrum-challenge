@@ -16,15 +16,14 @@ const Main = () => {
       .then(res => res.json())
       .then(data => {
         console.log('DATA', data);
-        // setRestaurants(data);
-        console.log('RESTAURANTS?', restaurants);
-        // May need to refactor as async/await
+        setRestaurants(data);
       });
   };
 
   useEffect(() => {
     getRestaurants();
-  }, [restaurants]);
+    console.log('RESTAURANTS??', restaurants);
+  }, []);
 
   return (
     <>
