@@ -12,8 +12,8 @@ const Main = () => {
   const [activeGenre, setActiveGenre] = useState('');
   const [activeQuery, setActiveQuery] = useState('');
 
-  // console.log('QUERY STATE?', activeQuery);
-  console.log('CURRENT RESTAURANTS:', displayRestaurants);
+  console.log('QUERY STATE?', activeQuery);
+  // console.log('CURRENT RESTAURANTS:', displayRestaurants);
 
   const getRestaurants = async () => {
     const response = await fetch(
@@ -38,38 +38,6 @@ const Main = () => {
       setActiveState(targetValue);
     } else if (category === 'genre') {
       setActiveGenre(targetValue);
-    }
-  };
-
-  const filterState = state => {
-    if (activeGenre) {
-      const filtered = restaurants.filter(
-        restaurant =>
-          restaurant.state === state &&
-          restaurant.genre.toLowerCase().includes(activeGenre)
-      );
-      setDisplayRestaurants(filtered);
-    } else {
-      const filtered = restaurants.filter(
-        restaurant => restaurant.state === state
-      );
-      setDisplayRestaurants(filtered);
-    }
-  };
-
-  const filterGenre = genre => {
-    if (activeState) {
-      const filtered = restaurants.filter(
-        restaurant =>
-          restaurant.genre.toLowerCase().includes(genre) &&
-          restaurant.state === activeState
-      );
-      setDisplayRestaurants(filtered);
-    } else {
-      const filtered = restaurants.filter(restaurant =>
-        restaurant.genre.toLowerCase().includes(genre)
-      );
-      setDisplayRestaurants(filtered);
     }
   };
 
@@ -101,13 +69,13 @@ const Main = () => {
       .filter(restaurant => restaurant.state === activeState)
       .filter(restaurant =>
         restaurant.genre.toLowerCase().includes(activeGenre)
-      )
-      .filter(
-        restaurant =>
-          restaurant.genre.toLowerCase().includes(activeQuery) ||
-          restaurant.name.toLowerCase().includes(activeQuery) ||
-          restaurant.city.toLowerCase().includes(activeQuery)
       );
+    // .filter(
+    //   restaurant =>
+    //     restaurant.genre.toLowerCase().includes(activeQuery) ||
+    //     restaurant.name.toLowerCase().includes(activeQuery) ||
+    //     restaurant.city.toLowerCase().includes(activeQuery)
+    // );
     setDisplayRestaurants(filtered);
   };
 
@@ -121,7 +89,6 @@ const Main = () => {
 
   return (
     <>
-      <h1>Main component!</h1>
       <Search handler={handleFormChange} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
