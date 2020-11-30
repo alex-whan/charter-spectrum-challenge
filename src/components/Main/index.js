@@ -13,8 +13,8 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // console.log('ACTIVE STATE:', activeState);
-  // console.log('ACTIVE GENRE:', activeGenre);
+  console.log('ACTIVE STATE:', activeState);
+  console.log('ACTIVE GENRE:', activeGenre);
   // console.log('ACTIVE QUERY:', activeQuery);
 
   const getRestaurants = async () => {
@@ -45,22 +45,31 @@ const Main = () => {
     }
   };
 
+  // const handleSubmit = e => {
+  //   // const { value } = e.target;
+  //   // e.persist();
+  //   const normalizedValue = e.target.value.toLowerCase();
+  //   // searchBox(normalizedValue);
+  //   console.log('Normal??', normalizedValue);
+  //   // setActiveQuery(normalizedValue);
+  // };
+
   const handleSubmit = e => {
-    // const { value } = e.target;
+    const { value } = e.target;
     e.persist();
-    const normalizedValue = e.target.value.toLowerCase();
-    searchBox(normalizedValue);
-    console.log('Normal??', normalizedValue);
+    const normalizedValue = value.toLowerCase();
+    console.log('VAL??', normalizedValue);
+    // search(normalizedValue);
     // setActiveQuery(normalizedValue);
   };
 
-  const searchBox = value => {
-    console.log('MADE IT TO SEARCH BOX ');
-    const filtered = restaurants.filter(restaurant =>
-      restaurant.genre.toLowerCase().includes(value)
-    );
-    console.log('FILTERED DATA??', filtered);
-  };
+  // const searchBox = value => {
+  //   console.log('MADE IT TO SEARCH BOX ');
+  //   const filtered = restaurants.filter(restaurant =>
+  //     restaurant.genre.toLowerCase().includes(value)
+  //   );
+  //   console.log('FILTERED DATA??', filtered);
+  // };
 
   const filterState = state => {
     if (activeGenre) {

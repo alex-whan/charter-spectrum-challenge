@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer = () => {
-  return <h1>Footer!</h1>;
+  return <h3>&copy; 2020 Alex Whan</h3>;
 };
 
 export default Footer;
