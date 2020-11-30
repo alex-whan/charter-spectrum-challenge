@@ -11,11 +11,13 @@ const Main = () => {
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
   const [activeQuery, setActiveQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log('QUERY STATE?', activeQuery);
   // console.log('CURRENT RESTAURANTS:', displayRestaurants);
 
   const getRestaurants = async () => {
+    setIsLoading(true);
     const response = await fetch(
       'https://code-challenge.spectrumtoolbox.com/api/restaurants',
       {
@@ -26,6 +28,7 @@ const Main = () => {
     );
 
     const data = await response.json();
+    setIsLoading(false);
     const alphabetizedData = data.sort((a, b) => (a.name > b.name ? 1 : -1));
     setRestaurants(alphabetizedData);
     setDisplayRestaurants(alphabetizedData);
@@ -41,13 +44,13 @@ const Main = () => {
     }
   };
 
-  const searchFilter = query => {
-    const normalizedQuery = query.toLowerCase();
+  const searchFilter = (query, arr) => {
+    // const normalizedQuery = query.toLowerCase();
     const filtered = restaurants.filter(restaurant => {
       if (
-        restaurant.genre.toLowerCase().includes(normalizedQuery) ||
-        restaurant.name.toLowerCase().includes(normalizedQuery) ||
-        restaurant.city.toLowerCase().includes(normalizedQuery)
+        restaurant.genre.toLowerCase().includes(query) ||
+        restaurant.name.toLowerCase().includes(query) ||
+        restaurant.city.toLowerCase().includes(query)
       ) {
         return restaurant;
       }
@@ -76,7 +79,8 @@ const Main = () => {
     //     restaurant.name.toLowerCase().includes(activeQuery) ||
     //     restaurant.city.toLowerCase().includes(activeQuery)
     // );
-    setDisplayRestaurants(filtered);
+    // setDisplayRestaurants(filtered);
+    searchFilter(activeQuery, filtered);
   };
 
   useEffect(() => {
@@ -93,6 +97,7 @@ const Main = () => {
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />
+      <h2>{isLoading ? 'LOADING....' : ''}</h2>
     </>
   );
 };
