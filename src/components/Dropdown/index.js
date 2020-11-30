@@ -3,6 +3,9 @@ import './Dropdown.css';
 
 const Dropdown = props => {
   const opts = props.opts;
+  const filterType = props.name;
+  console.log('PROPS???', props);
+  console.log('OPTS', opts);
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useState(false);
   const onClick = () => setIsActive(!isActive);
@@ -28,7 +31,7 @@ const Dropdown = props => {
   return (
     <div className="menu-container">
       <button onClick={onClick} className="menu-trigger">
-        Filter by State
+        Filter by {filterType}
       </button>
       <nav
         ref={dropdownRef}
@@ -36,7 +39,7 @@ const Dropdown = props => {
       >
         <ul>
           {opts.map(item => {
-            return <li key={item.id}>{item.code}</li>;
+            return <li key={item.id}>{item.name}</li>;
           })}
         </ul>
       </nav>

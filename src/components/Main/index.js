@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Table from '../Table';
 import Dropdown from '../Dropdown';
 import { STATES } from './constants/states';
+import { GENRES } from './constants/genres';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -43,8 +44,8 @@ const Main = () => {
   return (
     <>
       <h1>Main component!</h1>
-      <Dropdown opts={STATES} />
-      <Dropdown opts={STATES} />
+      <Dropdown name={'State'} opts={STATES} />
+      <Dropdown name={'Genre'} opts={GENRES} />
       <Table props={restaurants} />
     </>
   );
