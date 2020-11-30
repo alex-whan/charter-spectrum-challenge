@@ -27,6 +27,7 @@ const Main = () => {
     const data = await response.json();
     const alphabetizedData = data.sort((a, b) => (a.name > b.name ? 1 : -1));
     setRestaurants(alphabetizedData);
+    setDisplayRestaurants(alphabetizedData);
   };
 
   const handleSelect = e => {
@@ -43,7 +44,7 @@ const Main = () => {
     const filtered = restaurants.filter(
       restaurant => restaurant.state === state
     );
-    setRestaurants(filtered);
+    setDisplayRestaurants(filtered);
   };
 
   // const filterGenre = genre => {
@@ -66,7 +67,7 @@ const Main = () => {
       <h1>Main component!</h1>
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
-      <Table props={restaurants} />
+      <Table props={displayRestaurants} />
     </>
   );
 };
