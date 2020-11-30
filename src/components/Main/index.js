@@ -10,7 +10,8 @@ const Main = () => {
   const [activeGenre, setActiveGenre] = useState('');
 
   // console.log('ACTIVE:', activeState, activeGenre);
-  console.log('RESTAURANTS CURRENTLY', restaurants);
+  // console.log('RESTAURANTS CURRENTLY', restaurants);
+  console.log('ACTIVE STATE?', activeState);
 
   const getRestaurants = async () => {
     const response = await fetch(
@@ -31,7 +32,7 @@ const Main = () => {
     const targetValue = e.target.value;
     const category = e.target.name.toLowerCase();
     if (category === 'state') {
-      filterState(targetValue);
+      setActiveState(targetValue);
     } else if (category === 'genre') {
       // console.log('TARGET', targetValue);
       // let filtered = restaurants.filter(
@@ -62,13 +63,9 @@ const Main = () => {
     getRestaurants();
   }, []);
 
-  // useEffect(
-  //   (activeState, activeGenre) => {
-  //     filterState(activeState);
-  //     filterGenre(activeGenre);
-  //   },
-  //   [activeState, activeGenre]
-  // );
+  useEffect(() => {
+    filterState(activeState);
+  }, [activeState]);
 
   return (
     <>
