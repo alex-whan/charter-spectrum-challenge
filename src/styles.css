@@ -1,10 +1,42 @@
 table {
   margin: 0 auto;
-  background-color: steelblue;
+  background-color: rgb(67, 101, 128);
+  max-width: 80%;
+  display: inline-flex;
 }
 
 table td {
   border: 2px black solid;
+  padding: 2%;
+  max-width: 10%;
+}
+
+.title-row {
+  font-weight: bolder;
+}
+
+select {
+  text-transform: capitalize;
+  margin: 1%;
+}
+
+.pagination {
+  margin: 2%;
+  list-style-type: none;
+  max-width: 80%;
+}
+
+.pagination a {
+  color: black;
+  background-color: rgb(67, 101, 128);
+  padding: 10px 15px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.pagination a:hover {
+  background: darkslategray;
+  color: white;
 }
 
 .footer {

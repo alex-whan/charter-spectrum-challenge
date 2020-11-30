@@ -28,6 +28,12 @@ const Table = ({ props }) => {
         <h2>Restaurants:</h2>
         <table>
           <tbody>
+            <tr className="title-row">
+              <td>Name</td>
+              <td>City</td>
+              <td>Phone</td>
+              <td>Genres</td>
+            </tr>
             {currentEntries.map(restaurant => {
               return (
                 <tr key={restaurant.telephone}>
