@@ -10,7 +10,10 @@ const Main = () => {
   const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
-  const [activeQuery, setActiveQuery] = useState('');
+  // const [activeQuery, setActiveQuery] = useState('');
+
+  // console.log('QUERY STATE?', activeQuery);
+  console.log('CURRENT RESTAURANTS:', displayRestaurants);
 
   const getRestaurants = async () => {
     const response = await fetch(
@@ -72,13 +75,20 @@ const Main = () => {
 
   const searchFilter = query => {
     let normalizedQuery = query.toLowerCase();
-    console.log('QUERYY???', normalizedQuery);
-    const filtered = restaurants.filter(restaurant => {
-      restaurant.name.toLowerCase().includes(normalizedQuery);
-      // ||
-      //   restaurant.genre.toLowerCase().includes(normalizedQuery) ||
-      //   restaurant.city.toLowerCase().includes(normalizedQuery);
+
+    const filtered = [];
+
+    restaurants.map(restaurant => {
+      if (
+        restaurant.genre.toLowerCase().includes(normalizedQuery) ||
+        restaurant.name.toLowerCase().includes(normalizedQuery) ||
+        restaurant.city.toLowerCase().includes(normalizedQuery)
+      ) {
+        filtered.push(restaurant);
+      }
     });
+
+    console.log('FILTERED', filtered);
     setDisplayRestaurants(filtered);
   };
 
@@ -88,7 +98,14 @@ const Main = () => {
   //   searchFilter(e.search);
   // };
 
-  const handleInputChange = e => {
+  // const handleInputChange = e => {
+  //   const { value } = e.target;
+  //   e.persist();
+  //   setActiveQuery(value);
+  //   searchFilter(value);
+  // };
+
+  const handleFormChange = e => {
     const { value } = e.target;
     e.persist();
     searchFilter(value);
@@ -116,7 +133,7 @@ const Main = () => {
   return (
     <>
       <h1>Main component!</h1>
-      <Search handleInputChange={handleInputChange} />
+      <Search handler={handleFormChange} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />

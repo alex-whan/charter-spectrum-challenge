@@ -1,21 +1,32 @@
-import React from 'react';
-import useForm from '../../hooks/formHook';
+import React, { useState } from 'react';
 
 const Search = props => {
-  // const { handleSubmit, handleInputChange } = useForm(props.handleSubmit);
+  const [formValues, setFormValues] = useState('');
 
-  // const handleInputChange = e => {
-  //   const { value } = e.target;
-  //   e.persist();
-  //   console.log('VALUE IN SEARCH FORM:', value);
-  // };
+  // console.log('VALUES', formValues);
+  // e.persist();
+  // console.log('EVENT TARGET?', e.target.value);
+  // setFormValues({ ...formValues, [e.target.name]: e.target.value });
 
-  // onSubmit={handleSubmit}
+  const handleChange = e => {
+    props.handler(e);
+    setFormValues(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    console.log('You submitted:', formValues);
+    event.preventDefault();
+  };
 
   return (
-    <form>
-      <label>Search Here</label>
-      <input type="text" name="search" onChange={props.handleInputChange} />
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Search here!"
+        value={formValues}
+        name="search"
+        onChange={handleChange}
+      />
     </form>
   );
 };
