@@ -3,27 +3,36 @@ import React from 'react';
 const Table = ({ props }) => {
   const restaurants = props;
 
-  return (
-    <>
-      <h2>Restaurants:</h2>
-      <table>
-        <tbody>
-          {restaurants.map(restaurant => {
-            return (
-              <tr key={restaurant.telephone}>
-                <td>{restaurant.name}</td>
-                <td>
-                  {restaurant.city}, {restaurant.state}
-                </td>
-                <td>{restaurant.telephone}</td>
-                <td>{restaurant.genre}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </>
-  );
+  if (!restaurants.length > 0) {
+    return (
+      <>
+        <h2>Restaurants:</h2>
+        <h2>No results found.</h2>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <h2>Restaurants:</h2>
+        <table>
+          <tbody>
+            {restaurants.map(restaurant => {
+              return (
+                <tr key={restaurant.telephone}>
+                  <td>{restaurant.name}</td>
+                  <td>
+                    {restaurant.city}, {restaurant.state}
+                  </td>
+                  <td>{restaurant.telephone}</td>
+                  <td>{restaurant.genre}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </>
+    );
+  }
 };
 
 export default Table;

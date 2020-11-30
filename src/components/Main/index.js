@@ -101,9 +101,9 @@ const Main = () => {
 
   useEffect(() => {
     megaFilter(activeState, activeGenre, activeQuery);
-    // if (!activeGenre && !activeState && !activeQuery) {
-    //   getRestaurants();
-    // }
+    if (!activeGenre && !activeState && !activeQuery) {
+      getRestaurants();
+    }
   }, [activeState, activeGenre, activeQuery]);
 
   return (
