@@ -13,7 +13,9 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('QUERY STATE?', activeQuery);
+  console.log('ACTIVE STATE:', activeState);
+  console.log('ACTIVE GENRE:', activeGenre);
+  console.log('ACTIVE QUERY:', activeQuery);
   // console.log('CURRENT RESTAURANTS:', displayRestaurants);
 
   const getRestaurants = async () => {
@@ -44,43 +46,53 @@ const Main = () => {
     }
   };
 
-  const searchFilter = (query, arr) => {
-    // const normalizedQuery = query.toLowerCase();
-    const filtered = restaurants.filter(restaurant => {
-      if (
-        restaurant.genre.toLowerCase().includes(query) ||
-        restaurant.name.toLowerCase().includes(query) ||
-        restaurant.city.toLowerCase().includes(query)
-      ) {
-        return restaurant;
-      }
-    });
-
-    setDisplayRestaurants(filtered);
-  };
-
-  const handleFormChange = e => {
+  const handleSubmit = e => {
     const { value } = e.target;
     e.persist();
     const normalizedValue = value.toLowerCase();
     setActiveQuery(normalizedValue);
-    // searchFilter(activeQuery);
   };
 
   const megaFilter = (activeState, activeGenre, activeQuery) => {
+    // console.log('active query in FILTER', activeQuery);
+
     const filtered = restaurants
       .filter(restaurant => restaurant.state === activeState)
       .filter(restaurant =>
         restaurant.genre.toLowerCase().includes(activeGenre)
       );
-    // .filter(
-    //   restaurant =>
+
+    if (!activeQuery) {
+      const searchFilter = filtered.filter(
+        restaurant =>
+          restaurant.genre.toLowerCase().includes(activeQuery) ||
+          restaurant.name.toLowerCase().includes(activeQuery) ||
+          restaurant.city.toLowerCase().includes(activeQuery)
+      );
+      setDisplayRestaurants(searchFilter);
+    } else {
+      setDisplayRestaurants(filtered);
+    }
+
+    // .filter(restaurant => restaurant.name.includes(activeQuery))
+    // .filter(restaurant => restaurant.genre.includes(activeQuery))
+    // .filter(restaurant => restaurant.city.includes(activeQuery));
+
+    // const filtered = [];
+
+    // const filtered = [];
+
+    // preFilter.map(restaurant => {
+    //   if (
     //     restaurant.genre.toLowerCase().includes(activeQuery) ||
     //     restaurant.name.toLowerCase().includes(activeQuery) ||
     //     restaurant.city.toLowerCase().includes(activeQuery)
-    // );
+    //   ) {
+    //     filtered.push(restaurant);
+    //   }
+    // });
+
     // setDisplayRestaurants(filtered);
-    searchFilter(activeQuery, filtered);
   };
 
   useEffect(() => {
@@ -89,11 +101,14 @@ const Main = () => {
 
   useEffect(() => {
     megaFilter(activeState, activeGenre, activeQuery);
+    // if (!activeGenre && !activeState && !activeQuery) {
+    //   getRestaurants();
+    // }
   }, [activeState, activeGenre, activeQuery]);
 
   return (
     <>
-      <Search handler={handleFormChange} />
+      <Search handleSubmit={handleSubmit} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />

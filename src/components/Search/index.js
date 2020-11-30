@@ -9,12 +9,13 @@ const Search = props => {
   // setFormValues({ ...formValues, [e.target.name]: e.target.value });
 
   const handleChange = e => {
-    props.handler(e);
+    // props.handleChange(e);
     setFormValues(e.target.value);
   };
 
   const handleSubmit = e => {
     console.log('You submitted:', formValues);
+    props.handleSubmit(formValues);
     event.preventDefault();
   };
 
