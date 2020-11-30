@@ -6,6 +6,7 @@ import { GENRES } from './constants/genres';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
 
@@ -34,13 +35,7 @@ const Main = () => {
     if (category === 'state') {
       setActiveState(targetValue);
     } else if (category === 'genre') {
-      // console.log('TARGET', targetValue);
-      // let filtered = restaurants.filter(
-      //   restaurant => restaurant.genre.indexOf(targetValue) !== -1
-      // );
-      // // setActiveGenre(targetValue);
-      // console.log('FILTER RESULTS:', filtered);
-      // setRestaurants(filtered);
+      console.log('GENRE');
     }
   };
 
@@ -48,7 +43,6 @@ const Main = () => {
     const filtered = restaurants.filter(
       restaurant => restaurant.state === state
     );
-    console.log('FILTERED DATA', filtered);
     setRestaurants(filtered);
   };
 
