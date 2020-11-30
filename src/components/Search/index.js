@@ -9,14 +9,14 @@ const Search = props => {
   // setFormValues({ ...formValues, [e.target.name]: e.target.value });
 
   const handleChange = e => {
-    // props.handleChange(e);
     setFormValues(e.target.value);
   };
 
   const handleSubmit = e => {
+    e.persist();
     console.log('You submitted:', formValues);
     props.handleSubmit(formValues);
-    event.preventDefault();
+    e.preventDefault();
   };
 
   return (
@@ -28,6 +28,7 @@ const Search = props => {
         name="search"
         onChange={handleChange}
       />
+      <input type="submit" value="submit" />
     </form>
   );
 };

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Pagination from '../Pagination';
 
 const Table = ({ props }) => {
   const restaurants = props;
-  const [entries, setEntries] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage] = useState(10);
 

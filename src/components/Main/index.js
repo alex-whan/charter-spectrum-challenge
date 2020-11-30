@@ -13,9 +13,9 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('ACTIVE STATE:', activeState);
-  console.log('ACTIVE GENRE:', activeGenre);
-  console.log('ACTIVE QUERY:', activeQuery);
+  // console.log('ACTIVE STATE:', activeState);
+  // console.log('ACTIVE GENRE:', activeGenre);
+  // console.log('ACTIVE QUERY:', activeQuery);
 
   const getRestaurants = async () => {
     setIsLoading(true);
@@ -46,129 +46,62 @@ const Main = () => {
   };
 
   const handleSubmit = e => {
-    const { value } = e.target;
+    // const { value } = e.target;
     e.persist();
-    const normalizedValue = value.toLowerCase();
-    search(normalizedValue);
+    const normalizedValue = e.target.value.toLowerCase();
+    searchBox(normalizedValue);
+    console.log('Normal??', normalizedValue);
     // setActiveQuery(normalizedValue);
   };
 
-  const search = value => {
-    let filtered = restaurants.filter(
-      restaurant =>
-        restaurant.genre.toLowerCase().includes(activeQuery) ||
-        restaurant.name.toLowerCase().includes(activeQuery) ||
-        restaurant.city.toLowerCase().includes(activeQuery)
+  const searchBox = value => {
+    console.log('MADE IT TO SEARCH BOX ');
+    const filtered = restaurants.filter(restaurant =>
+      restaurant.genre.toLowerCase().includes(value)
     );
+    console.log('FILTERED DATA??', filtered);
+  };
 
-    if (activeState) {
-      filtered = filtered.filter(
-        restaurant => restaurant.state === activeState
-      );
-    }
-
+  const filterState = state => {
     if (activeGenre) {
-      filtered = filtered.filter(restaurant =>
-        restaurant.genre.toLowerCase().includes(activeGenre.toLowerCase())
+      const filtered = restaurants.filter(
+        restaurant =>
+          restaurant.state === state &&
+          restaurant.genre.toLowerCase().includes(activeGenre)
       );
+      setDisplayRestaurants(filtered);
+    } else {
+      const filtered = restaurants.filter(
+        restaurant => restaurant.state === state
+      );
+      setDisplayRestaurants(filtered);
     }
-
-    setDisplayRestaurants(filtered);
   };
 
-  // const megaFilter = (activeState, activeGenre) => {
-  //   const filtered = restaurants
-  //     .filter(restaurant =>
-  //       restaurant.genre.toLowerCase().includes(activeGenre)
-  //     )
-  //     .filter(restaurant => restaurant.state === activeState);
-  //   console.log('FILTERED RESTAURANTS', filtered);
-  //   setDisplayRestaurants(filtered);
-  // };
-
-  // ATTEMPTED RE-DO
-  const megaFilter = (activeState, activeGenre, activeQuery) => {
-    const states = restaurants.filter(
-      restaurant => restaurant.state === activeState
-    );
-
-    const genres = states.filter(restaurant =>
-      restaurant.genre.toLowerCase().includes(activeGenre)
-    );
-
-    console.log('GENRES??', genres[0]);
-
-    setDisplayRestaurants(genres);
-
-    // if (!activeQuery) {
-    //   const searchFilter = filtered.filter(
-    //     restaurant =>
-    //       restaurant.genre.toLowerCase().includes(activeQuery) ||
-    //       restaurant.name.toLowerCase().includes(activeQuery) ||
-    //       restaurant.city.toLowerCase().includes(activeQuery)
-    //   );
-    //   setDisplayRestaurants(searchFilter);
-    // } else {
-    //   setDisplayRestaurants(filtered);
-    // }
+  const filterGenre = genre => {
+    if (activeState) {
+      const filtered = restaurants.filter(
+        restaurant =>
+          restaurant.genre.toLowerCase().includes(genre) &&
+          restaurant.state === activeState
+      );
+      setDisplayRestaurants(filtered);
+    } else {
+      const filtered = restaurants.filter(restaurant =>
+        restaurant.genre.toLowerCase().includes(genre)
+      );
+      setDisplayRestaurants(filtered);
+    }
   };
-
-  /// ORIGINAL
-
-  // const megaFilter = (activeState, activeGenre, activeQuery) => {
-  //   // console.log('active query in FILTER', activeQuery);
-
-  //   const filtered = restaurants
-  //     .filter(restaurant => restaurant.state === activeState)
-  //     .filter(restaurant =>
-  //       restaurant.genre.toLowerCase().includes(activeGenre)
-  //     );
-
-  //   if (!activeQuery) {
-  //     const searchFilter = filtered.filter(
-  //       restaurant =>
-  //         restaurant.genre.toLowerCase().includes(activeQuery) ||
-  //         restaurant.name.toLowerCase().includes(activeQuery) ||
-  //         restaurant.city.toLowerCase().includes(activeQuery)
-  //     );
-  //     setDisplayRestaurants(searchFilter);
-  //   } else {
-  //     setDisplayRestaurants(filtered);
-  //   }
-  // };
-
-  //   // .filter(restaurant => restaurant.name.includes(activeQuery))
-  //   // .filter(restaurant => restaurant.genre.includes(activeQuery))
-  //   // .filter(restaurant => restaurant.city.includes(activeQuery));
-
-  //   // const filtered = [];
-
-  //   // const filtered = [];
-
-  //   // preFilter.map(restaurant => {
-  //   //   if (
-  //   //     restaurant.genre.toLowerCase().includes(activeQuery) ||
-  //   //     restaurant.name.toLowerCase().includes(activeQuery) ||
-  //   //     restaurant.city.toLowerCase().includes(activeQuery)
-  //   //   ) {
-  //   //     filtered.push(restaurant);
-  //   //   }
-  //   // });
-
-  //   // setDisplayRestaurants(filtered);
-  // };
 
   useEffect(() => {
     getRestaurants();
   }, []);
 
   useEffect(() => {
-    megaFilter(activeState, activeGenre, activeQuery);
-
-    // if (!activeGenre && !activeState && !activeQuery) {
-    //   getRestaurants();
-    // }
-  }, [activeState, activeGenre, activeQuery]);
+    filterState(activeState);
+    filterGenre(activeGenre);
+  }, [activeState, activeGenre]);
 
   return (
     <>
