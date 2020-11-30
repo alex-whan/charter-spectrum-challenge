@@ -9,6 +9,9 @@ const Dropdown = props => {
     <form>
       <label>Filter by {filterType}</label>
       <select name={filterType} onChange={props.handler}>
+        <option value="" selected>
+          All
+        </option>
         {opts.map(item => {
           return (
             <option key={item.id} value={item.name}>

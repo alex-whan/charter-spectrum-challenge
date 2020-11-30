@@ -1,5 +1,4 @@
 exports.GENRES = [
-  { id: 0, name: 'all' },
   { id: 1, name: 'american' },
   { id: 2, name: 'seafood' },
   { id: 3, name: 'international' },

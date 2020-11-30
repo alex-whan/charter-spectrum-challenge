@@ -1,5 +1,4 @@
 exports.STATES = [
-  { id: 0, fullName: 'all', name: 'all' },
   { id: 1, fullName: 'alabama', name: 'AL' },
   { id: 2, fullName: 'alaska', name: 'AK' },
   { id: 3, fullName: 'arizona', name: 'AZ' },
