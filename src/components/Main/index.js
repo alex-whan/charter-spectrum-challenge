@@ -74,36 +74,19 @@ const Main = () => {
   };
 
   const searchFilter = query => {
-    let normalizedQuery = query.toLowerCase();
-
-    const filtered = [];
-
-    restaurants.map(restaurant => {
+    const normalizedQuery = query.toLowerCase();
+    const filtered = restaurants.filter(restaurant => {
       if (
         restaurant.genre.toLowerCase().includes(normalizedQuery) ||
         restaurant.name.toLowerCase().includes(normalizedQuery) ||
         restaurant.city.toLowerCase().includes(normalizedQuery)
       ) {
-        filtered.push(restaurant);
+        return restaurant;
       }
     });
 
-    console.log('FILTERED', filtered);
     setDisplayRestaurants(filtered);
   };
-
-  // const handleSubmit = e => {
-  //   console.log('SUBMITTED VALUE??', e.search);
-  //   event.preventDefault();
-  //   searchFilter(e.search);
-  // };
-
-  // const handleInputChange = e => {
-  //   const { value } = e.target;
-  //   e.persist();
-  //   setActiveQuery(value);
-  //   searchFilter(value);
-  // };
 
   const handleFormChange = e => {
     const { value } = e.target;
@@ -119,16 +102,6 @@ const Main = () => {
     filterState(activeState);
     filterGenre(activeGenre);
   }, [activeState, activeGenre]);
-
-  // useEffect(() => {
-  //   filterState(activeState);
-  // }, [activeState]);
-
-  // useEffect(() => {
-  //   filterGenre(activeGenre);
-  // }, [activeGenre]);
-
-  // need to have a handleSubmit that gets passed into the Search component to go with the hook
 
   return (
     <>
