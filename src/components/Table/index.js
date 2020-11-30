@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Pagination from '../Pagination';
+import '../../styles.css';
 
 const Table = ({ props }) => {
   const restaurants = props;

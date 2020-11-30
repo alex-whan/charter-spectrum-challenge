@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles.css';
 
 const Dropdown = props => {
   const opts = props.opts;

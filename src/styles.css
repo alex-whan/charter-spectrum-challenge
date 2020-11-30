@@ -1,0 +1,19 @@
+table {
+  margin: 0 auto;
+  background-color: steelblue;
+}
+
+table td {
+  border: 2px black solid;
+}
+
+.footer {
+  width: 100%;
+  background-color: #282c34;
+  color: white;
+}
+
+.App {
+  background-color: #282c34;
+  color: white;
+}
