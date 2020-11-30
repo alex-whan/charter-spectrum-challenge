@@ -9,6 +9,7 @@ const Main = () => {
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
 
+  // console.log('ACTIVE:', activeState, activeGenre);
   console.log('RESTAURANTS CURRENTLY', restaurants);
 
   const getRestaurants = async () => {
@@ -30,16 +31,19 @@ const Main = () => {
     const targetValue = e.target.value;
     const category = e.target.name.toLowerCase();
     if (category === 'state') {
-      setActiveState(targetValue);
-      // filterState(targetValue);
+      filterState(targetValue);
     } else if (category === 'genre') {
-      setActiveGenre(targetValue);
-      // filterGenre(targetValue);
+      // console.log('TARGET', targetValue);
+      // let filtered = restaurants.filter(
+      //   restaurant => restaurant.genre.indexOf(targetValue) !== -1
+      // );
+      // // setActiveGenre(targetValue);
+      // console.log('FILTER RESULTS:', filtered);
+      // setRestaurants(filtered);
     }
   };
 
   const filterState = state => {
-    // console.log('FILTERING BY:', state);
     const filtered = restaurants.filter(
       restaurant => restaurant.state === state
     );
@@ -47,20 +51,24 @@ const Main = () => {
     setRestaurants(filtered);
   };
 
-  const filterGenre = genre => {
-    const filtered = restaurants.filter(
-      restaurant => restaurant.genre === genre
-    );
-    setRestaurants(filtered);
-  };
+  // const filterGenre = genre => {
+  //   const filtered = restaurants.filter(restaurant =>
+  //     restaurant.genre.includes(genre)
+  //   );
+  //   setRestaurants(filtered);
+  // };
 
   useEffect(() => {
     getRestaurants();
-  }, [activeGenre, activeState]);
+  }, []);
 
-  useEffect(() => {
-    console.log('active:', activeState, activeGenre);
-  }, [activeState, activeGenre]);
+  // useEffect(
+  //   (activeState, activeGenre) => {
+  //     filterState(activeState);
+  //     filterGenre(activeGenre);
+  //   },
+  //   [activeState, activeGenre]
+  // );
 
   return (
     <>
