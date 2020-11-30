@@ -7,12 +7,12 @@ const Table = ({ props }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage] = useState(10);
 
-  // Get current
+  // Gets current page array
   const indexOfLastPage = currentPage * entriesPerPage;
   const indexOfFirstPage = indexOfLastPage - entriesPerPage;
   const currentEntries = restaurants.slice(indexOfFirstPage, indexOfLastPage);
 
-  // change page
+  // Changes page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   if (!restaurants.length > 0) {
@@ -59,18 +59,3 @@ const Table = ({ props }) => {
 };
 
 export default Table;
-
-// address1: "201 Waterfront St"
-// attire: "business casual"
-// city: "Oxon Hill"
-// genre: "Steak,American,Contemporary,Seafood,Cafe"
-// hours: "Open Daily 5:30 PM-10:00 PM"
-// id: "f223fdd0-4adc-423e-9747-980a66c256ca"
-// lat: "38.782098"
-// long: "-77.017492"
-// name: "Old Hickory Steakhouse"
-// state: "MD"
-// tags: "Social,Food and Dining,Restaurants,Steakhouses"
-// telephone: "(301) 965-4000"
-// website: "http://www.gaylordnational.com"
-// zip: "20745"
