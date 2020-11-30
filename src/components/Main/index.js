@@ -10,8 +10,7 @@ const Main = () => {
   const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
-
-  console.log('ACTIVE:', activeState, activeGenre);
+  const [activeQuery, setActiveQuery] = useState('');
 
   const getRestaurants = async () => {
     const response = await fetch(
@@ -71,8 +70,28 @@ const Main = () => {
     }
   };
 
-  const handleSubmit = e => {
-    console.log('TARGET VALUE??', e.target.value);
+  const searchFilter = query => {
+    let normalizedQuery = query.toLowerCase();
+    console.log('QUERYY???', normalizedQuery);
+    const filtered = restaurants.filter(restaurant => {
+      restaurant.name.toLowerCase().includes(normalizedQuery);
+      // ||
+      //   restaurant.genre.toLowerCase().includes(normalizedQuery) ||
+      //   restaurant.city.toLowerCase().includes(normalizedQuery);
+    });
+    setDisplayRestaurants(filtered);
+  };
+
+  // const handleSubmit = e => {
+  //   console.log('SUBMITTED VALUE??', e.search);
+  //   event.preventDefault();
+  //   searchFilter(e.search);
+  // };
+
+  const handleInputChange = e => {
+    const { value } = e.target;
+    e.persist();
+    searchFilter(value);
   };
 
   useEffect(() => {
@@ -97,7 +116,7 @@ const Main = () => {
   return (
     <>
       <h1>Main component!</h1>
-      <Search handler={handleSubmit} />
+      <Search handleInputChange={handleInputChange} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />

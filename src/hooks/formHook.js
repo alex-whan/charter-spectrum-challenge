@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 const useForm = callback => {
   const [values, setValues] = useState({});
+  console.log('VALUES', values);
 
   const handleSubmit = e => {
     if (e) {
