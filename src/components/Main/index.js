@@ -9,6 +9,8 @@ const Main = () => {
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
 
+  console.log('RESTAURANTS CURRENTLY', restaurants);
+
   const getRestaurants = async () => {
     const response = await fetch(
       'https://code-challenge.spectrumtoolbox.com/api/restaurants',
@@ -24,10 +26,24 @@ const Main = () => {
     setRestaurants(alphabetizedData);
   };
 
+  const handleSelect = e => {
+    const targetValue = e.target.value;
+    const category = e.target.name.toLowerCase();
+    if (category === 'state') {
+      setActiveState(targetValue);
+      // filterState(targetValue);
+    } else if (category === 'genre') {
+      setActiveGenre(targetValue);
+      // filterGenre(targetValue);
+    }
+  };
+
   const filterState = state => {
+    // console.log('FILTERING BY:', state);
     const filtered = restaurants.filter(
       restaurant => restaurant.state === state
     );
+    console.log('FILTERED DATA', filtered);
     setRestaurants(filtered);
   };
 
@@ -40,13 +56,17 @@ const Main = () => {
 
   useEffect(() => {
     getRestaurants();
-  }, []);
+  }, [activeGenre, activeState]);
+
+  useEffect(() => {
+    console.log('active:', activeState, activeGenre);
+  }, [activeState, activeGenre]);
 
   return (
     <>
       <h1>Main component!</h1>
-      <Dropdown name={'State'} opts={STATES} />
-      <Dropdown name={'Genre'} opts={GENRES} />
+      <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
+      <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={restaurants} />
     </>
   );

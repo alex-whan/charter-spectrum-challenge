@@ -2,7 +2,6 @@ import React from 'react';
 
 const Table = ({ props }) => {
   const restaurants = props;
-  console.log('WHAT IS THIS - RESTAURANTS?', restaurants);
 
   return (
     <>
