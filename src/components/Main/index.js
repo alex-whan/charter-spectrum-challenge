@@ -10,9 +10,7 @@ const Main = () => {
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
 
-  // console.log('ACTIVE:', activeState, activeGenre);
-  // console.log('RESTAURANTS CURRENTLY', restaurants);
-  console.log('ACTIVE STATE?', activeState);
+  console.log('ACTIVE:', activeState, activeGenre);
 
   const getRestaurants = async () => {
     const response = await fetch(
@@ -36,23 +34,41 @@ const Main = () => {
     if (category === 'state') {
       setActiveState(targetValue);
     } else if (category === 'genre') {
-      console.log('GENRE');
+      setActiveGenre(targetValue);
     }
   };
 
   const filterState = state => {
-    const filtered = restaurants.filter(
-      restaurant => restaurant.state === state
-    );
-    setDisplayRestaurants(filtered);
+    if (activeGenre) {
+      const filtered = restaurants.filter(
+        restaurant =>
+          restaurant.state === state &&
+          restaurant.genre.toLowerCase().includes(activeGenre)
+      );
+      setDisplayRestaurants(filtered);
+    } else {
+      const filtered = restaurants.filter(
+        restaurant => restaurant.state === state
+      );
+      setDisplayRestaurants(filtered);
+    }
   };
 
-  // const filterGenre = genre => {
-  //   const filtered = restaurants.filter(restaurant =>
-  //     restaurant.genre.includes(genre)
-  //   );
-  //   setRestaurants(filtered);
-  // };
+  const filterGenre = genre => {
+    if (activeState) {
+      const filtered = restaurants.filter(
+        restaurant =>
+          restaurant.genre.toLowerCase().includes(genre) &&
+          restaurant.state === activeState
+      );
+      setDisplayRestaurants(filtered);
+    } else {
+      const filtered = restaurants.filter(restaurant =>
+        restaurant.genre.toLowerCase().includes(genre)
+      );
+      setDisplayRestaurants(filtered);
+    }
+  };
 
   useEffect(() => {
     getRestaurants();
@@ -60,7 +76,16 @@ const Main = () => {
 
   useEffect(() => {
     filterState(activeState);
-  }, [activeState]);
+    filterGenre(activeGenre);
+  }, [activeState, activeGenre]);
+
+  // useEffect(() => {
+  //   filterState(activeState);
+  // }, [activeState]);
+
+  // useEffect(() => {
+  //   filterGenre(activeGenre);
+  // }, [activeGenre]);
 
   return (
     <>
