@@ -6,6 +6,8 @@ import { GENRES } from './constants/genres';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
+  const [activeState, setActiveState] = useState('');
+  const [activeGenre, setActiveGenre] = useState('');
 
   const getRestaurants = async () => {
     const response = await fetch(
@@ -38,7 +40,6 @@ const Main = () => {
 
   useEffect(() => {
     getRestaurants();
-    // console.log('RESTAURANTS??', restaurants);
   }, []);
 
   return (
