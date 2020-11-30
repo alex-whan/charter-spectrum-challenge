@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Pagination from '../Pagination';
 
 const Table = ({ props }) => {
   const restaurants = props;
+  const [entries, setEntries] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [entriesPerPage] = useState(10);
+
+  // Get current
+  const indexOfLastPage = currentPage * entriesPerPage;
+  const indexOfFirstPage = indexOfLastPage - entriesPerPage;
+  const currentEntries = restaurants.slice(indexOfFirstPage, indexOfLastPage);
+
+  // change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   if (!restaurants.length > 0) {
     return (
@@ -16,7 +28,7 @@ const Table = ({ props }) => {
         <h2>Restaurants:</h2>
         <table>
           <tbody>
-            {restaurants.map(restaurant => {
+            {currentEntries.map(restaurant => {
               return (
                 <tr key={restaurant.telephone}>
                   <td>{restaurant.name}</td>
@@ -30,6 +42,11 @@ const Table = ({ props }) => {
             })}
           </tbody>
         </table>
+        <Pagination
+          entriesPerPage={entriesPerPage}
+          totalEntries={restaurants.length}
+          paginate={paginate}
+        />
       </>
     );
   }
