@@ -18,14 +18,14 @@ const Table = ({ props }) => {
   if (!restaurants.length > 0) {
     return (
       <>
-        <h2>Restaurants:</h2>
+        <h2>Restaurant Results:</h2>
         <h2>No results found.</h2>
       </>
     );
   } else {
     return (
       <>
-        <h2>Restaurants:</h2>
+        <h2>Restaurant Results:</h2>
         <table>
           <tbody>
             <tr className="title-row">

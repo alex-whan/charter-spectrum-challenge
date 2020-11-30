@@ -1,6 +1,5 @@
 table {
   margin: 0 auto;
-  background-color: rgb(67, 101, 128);
   max-width: 80%;
   display: inline-flex;
 }
@@ -9,15 +8,23 @@ table td {
   border: 2px black solid;
   padding: 2%;
   max-width: 10%;
+  background-color: rgb(67, 101, 128);
 }
 
-.title-row {
+.title-row td {
   font-weight: bolder;
+  background-color: #494e5c;
+}
+
+.search {
+  width: 30%;
+  margin: 1%;
 }
 
 select {
   text-transform: capitalize;
   margin: 1%;
+  width: 10%;
 }
 
 .pagination {
@@ -35,7 +42,7 @@ select {
 }
 
 .pagination a:hover {
-  background: darkslategray;
+  background: #494e5c;
   color: white;
 }
 

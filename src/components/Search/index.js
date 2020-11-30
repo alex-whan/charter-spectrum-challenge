@@ -22,13 +22,14 @@ const Search = props => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className="search"
         type="text"
-        placeholder="Search here!"
+        placeholder="Search restaurants by name, city, or genre!"
         value={formValues}
         name="search"
         onChange={handleChange}
       />
-      <input type="submit" value="submit" />
+      <input type="submit" value="Search!" />
     </form>
   );
 };
