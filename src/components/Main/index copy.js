@@ -10,7 +10,7 @@ const Main = () => {
   const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
-  const [activeQuery, setActiveQuery] = useState('');
+  // const [activeQuery, setActiveQuery] = useState('');
 
   // console.log('QUERY STATE?', activeQuery);
   console.log('CURRENT RESTAURANTS:', displayRestaurants);
@@ -91,24 +91,15 @@ const Main = () => {
   const handleFormChange = e => {
     const { value } = e.target;
     e.persist();
-    const normalizedValue = value.toLowerCase();
-    setActiveQuery(normalizedValue);
-    // searchFilter(activeQuery);
+    searchFilter(value);
   };
 
-  const megaFilter = (activeState, activeGenre, activeQuery) => {
+  const megaFilter = (activeState, activeGenre) => {
     const filtered = restaurants
       .filter(restaurant => restaurant.state === activeState)
       .filter(restaurant =>
         restaurant.genre.toLowerCase().includes(activeGenre)
-      )
-      .filter(
-        restaurant =>
-          restaurant.genre.toLowerCase().includes(activeQuery) ||
-          restaurant.name.toLowerCase().includes(activeQuery) ||
-          restaurant.city.toLowerCase().includes(activeQuery)
       );
-    setDisplayRestaurants(filtered);
   };
 
   useEffect(() => {
@@ -116,8 +107,9 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    megaFilter(activeState, activeGenre, activeQuery);
-  }, [activeState, activeGenre, activeQuery]);
+    filterState(activeState);
+    filterGenre(activeGenre);
+  }, [activeState, activeGenre]);
 
   return (
     <>
