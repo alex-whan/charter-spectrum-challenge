@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Table from '../Table';
 import Dropdown from '../Dropdown';
+import Search from '../Search';
 import { STATES } from './constants/states';
 import { GENRES } from './constants/genres';
 
@@ -70,6 +71,10 @@ const Main = () => {
     }
   };
 
+  const handleSubmit = e => {
+    console.log('TARGET VALUE??', e.target.value);
+  };
+
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -87,9 +92,12 @@ const Main = () => {
   //   filterGenre(activeGenre);
   // }, [activeGenre]);
 
+  // need to have a handleSubmit that gets passed into the Search component to go with the hook
+
   return (
     <>
       <h1>Main component!</h1>
+      <Search handler={handleSubmit} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />
