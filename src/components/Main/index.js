@@ -110,21 +110,28 @@ const Main = () => {
   //   setDisplayRestaurants(filtered);
   // };
 
+  // HOW DO WE GET THIS TO RESET PROPERLY?? NEED TO HANDLE THE 'ALL' SELECTION
+
   const filterState = restaurant => {
-    return restaurant.state === activeState;
+    if (activeState) {
+      return restaurant.state === activeState;
+    } else {
+      return restaurant;
+    }
     // return restaurants.filter(restaurant => restaurant.state === state);
     // console.log('FILTER STATE', filtered);
     // setDisplayRestaurants(filtered);
     // return filtered;
   };
 
-  const filterGenre = (arr, genre) => {
-    const filtered = arr.filter(restaurant =>
-      restaurant.genre.toLowerCase().includes(genre)
-    );
+  const filterGenre = restaurant => {
+    return restaurant.genre.toLowerCase().includes(activeGenre);
+    // const filtered = arr.filter(restaurant =>
+    //   restaurant.genre.toLowerCase().includes(genre)
+    // );
     // console.log('FILTER GENRE', filtered);
     // setDisplayRestaurants(filtered);
-    return filtered;
+    // return filtered;
   };
 
   const filterSearch = (arr, query) => {
@@ -159,7 +166,9 @@ const Main = () => {
     // filterSearch(activeQuery);
     // setDisplayRestaurants(results);
     let result = restaurants.filter(filterState);
+    result = result.filter(filterGenre);
     console.log('RES??', result);
+    setDisplayRestaurants(result);
   }, [activeState, activeGenre, activeQuery]);
 
   return (
