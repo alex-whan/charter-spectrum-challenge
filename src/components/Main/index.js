@@ -13,7 +13,10 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('ACTIVE QUERY:', activeQuery);
+  // console.log('ACTIVE STATE:', activeState);
+  // console.log('ACTIVE GENRE:', activeGenre);
+  // console.log('ACTIVE QUERY:', activeQuery);
+  // console.log('CURRENT DISPLAY:', displayRestaurants);
 
   const getRestaurants = async () => {
     setIsLoading(true);
@@ -49,40 +52,78 @@ const Main = () => {
   };
 
   const clearSearch = () => {
+    setActiveState('');
+    setActiveGenre('');
     setActiveQuery('');
+    filterState(activeState);
+    filterGenre(activeGenre);
     filterSearch(activeQuery);
   };
 
+  // const filterState = state => {
+  //   if (activeGenre) {
+  //     const filtered = restaurants.filter(
+  //       restaurant =>
+  //         restaurant.state === state &&
+  //         restaurant.genre.toLowerCase().includes(activeGenre)
+  //     );
+  //     setDisplayRestaurants(filtered);
+  //   } else {
+  //     const filtered = restaurants.filter(
+  //       restaurant => restaurant.state === state
+  //     );
+  //     setDisplayRestaurants(filtered);
+  //   }
+  // };
+
+  // const filterGenre = genre => {
+  //   if (activeState) {
+  //     const filtered = restaurants.filter(
+  //       restaurant =>
+  //         restaurant.genre.toLowerCase().includes(genre) &&
+  //         restaurant.state === activeState
+  //     );
+  //     setDisplayRestaurants(filtered);
+  //   } else {
+  //     const filtered = restaurants.filter(restaurant =>
+  //       restaurant.genre.toLowerCase().includes(genre)
+  //     );
+  //     setDisplayRestaurants(filtered);
+  //   }
+  // };
+
+  // const filterSearch = query => {
+  //   const filtered = restaurants.filter(place => {
+  //     let normalizedName = place.name.toLowerCase();
+  //     let normalizedCity = place.city.toLowerCase();
+  //     let normalizedGenre = place.genre.toLowerCase();
+
+  //     if (
+  //       normalizedName.includes(query) ||
+  //       normalizedCity.includes(query) ||
+  //       normalizedGenre.includes(query)
+  //     ) {
+  //       return place;
+  //     }
+  //   });
+  //   console.log('RESULTS OF FILTER:', filtered);
+  //   setDisplayRestaurants(filtered);
+  // };
+
   const filterState = state => {
-    if (activeGenre) {
-      const filtered = restaurants.filter(
-        restaurant =>
-          restaurant.state === state &&
-          restaurant.genre.toLowerCase().includes(activeGenre)
-      );
-      setDisplayRestaurants(filtered);
-    } else {
-      const filtered = restaurants.filter(
-        restaurant => restaurant.state === state
-      );
-      setDisplayRestaurants(filtered);
-    }
+    const filtered = restaurants.filter(
+      restaurant => restaurant.state === state
+    );
+    console.log('FILTER STATE', filtered);
+    setDisplayRestaurants(filtered);
   };
 
   const filterGenre = genre => {
-    if (activeState) {
-      const filtered = restaurants.filter(
-        restaurant =>
-          restaurant.genre.toLowerCase().includes(genre) &&
-          restaurant.state === activeState
-      );
-      setDisplayRestaurants(filtered);
-    } else {
-      const filtered = restaurants.filter(restaurant =>
-        restaurant.genre.toLowerCase().includes(genre)
-      );
-      setDisplayRestaurants(filtered);
-    }
+    const filtered = restaurants.filter(restaurant =>
+      restaurant.genre.toLowerCase().includes(genre)
+    );
+    console.log('FILTER GENRE', filtered);
+    setDisplayRestaurants(filtered);
   };
 
   const filterSearch = query => {
@@ -99,7 +140,7 @@ const Main = () => {
         return place;
       }
     });
-    console.log('RESULTS OF FILTER:', filtered);
+    console.log('FILTER SEARCH', filtered);
     setDisplayRestaurants(filtered);
   };
 
@@ -108,17 +149,9 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (activeState) {
-      filterState(activeState);
-    }
-
-    if (activeGenre) {
-      filterGenre(activeGenre);
-    }
-
-    if (activeQuery) {
-      filterSearch(activeQuery);
-    }
+    filterState(activeState);
+    // filterGenre(activeGenre);
+    // filterSearch(activeQuery);
   }, [activeState, activeGenre, activeQuery]);
 
   return (
