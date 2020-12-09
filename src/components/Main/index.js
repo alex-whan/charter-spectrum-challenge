@@ -61,56 +61,6 @@ const Main = () => {
     // filterSearch(activeQuery);
   };
 
-  // const filterState = state => {
-  //   if (activeGenre) {
-  //     const filtered = restaurants.filter(
-  //       restaurant =>
-  //         restaurant.state === state &&
-  //         restaurant.genre.toLowerCase().includes(activeGenre)
-  //     );
-  //     setDisplayRestaurants(filtered);
-  //   } else {
-  //     const filtered = restaurants.filter(
-  //       restaurant => restaurant.state === state
-  //     );
-  //     setDisplayRestaurants(filtered);
-  //   }
-  // };
-
-  // const filterGenre = genre => {
-  //   if (activeState) {
-  //     const filtered = restaurants.filter(
-  //       restaurant =>
-  //         restaurant.genre.toLowerCase().includes(genre) &&
-  //         restaurant.state === activeState
-  //     );
-  //     setDisplayRestaurants(filtered);
-  //   } else {
-  //     const filtered = restaurants.filter(restaurant =>
-  //       restaurant.genre.toLowerCase().includes(genre)
-  //     );
-  //     setDisplayRestaurants(filtered);
-  //   }
-  // };
-
-  // const filterSearch = query => {
-  //   const filtered = restaurants.filter(place => {
-  //     let normalizedName = place.name.toLowerCase();
-  //     let normalizedCity = place.city.toLowerCase();
-  //     let normalizedGenre = place.genre.toLowerCase();
-
-  //     if (
-  //       normalizedName.includes(query) ||
-  //       normalizedCity.includes(query) ||
-  //       normalizedGenre.includes(query)
-  //     ) {
-  //       return place;
-  //     }
-  //   });
-  //   console.log('RESULTS OF FILTER:', filtered);
-  //   setDisplayRestaurants(filtered);
-  // };
-
   // HOW DO WE GET THIS TO RESET PROPERLY?? NEED TO HANDLE THE 'ALL' SELECTION
 
   const filterState = restaurant => {
@@ -119,10 +69,6 @@ const Main = () => {
     } else {
       return restaurant;
     }
-    // return restaurants.filter(restaurant => restaurant.state === state);
-    // console.log('FILTER STATE', filtered);
-    // setDisplayRestaurants(filtered);
-    // return filtered;
   };
 
   const filterGenre = restaurant => {
@@ -131,12 +77,6 @@ const Main = () => {
     } else {
       return restaurant;
     }
-    // const filtered = arr.filter(restaurant =>
-    //   restaurant.genre.toLowerCase().includes(genre)
-    // );
-    // console.log('FILTER GENRE', filtered);
-    // setDisplayRestaurants(filtered);
-    // return filtered;
   };
 
   const filterSearch = restaurant => {
@@ -155,25 +95,6 @@ const Main = () => {
       return restaurant;
     }
   };
-
-  // const filterSearch = (arr, query) => {
-  //   const filtered = displayRestaurants.filter(place => {
-  //     let normalizedName = place.name.toLowerCase();
-  //     let normalizedCity = place.city.toLowerCase();
-  //     let normalizedGenre = place.genre.toLowerCase();
-
-  //     if (
-  //       normalizedName.includes(query) ||
-  //       normalizedCity.includes(query) ||
-  //       normalizedGenre.includes(query)
-  //     ) {
-  //       return place;
-  //     }
-  //   });
-  //   // console.log('FILTER SEARCH', filtered);
-  //   return filtered;
-  //   // setDisplayRestaurants(filtered);
-  // };
 
   useEffect(() => {
     getRestaurants();
