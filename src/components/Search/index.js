@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 
-const Search = props => {
-  const [formValues, setFormValues] = useState('');
+const Search = ({ formHandler }) => {
+  const [formValue, setFormValues] = useState('');
 
   const handleChange = e => {
     setFormValues(e.target.value);
   };
 
+  // const handleSubmit = e => {
+  //   e.persist();
+  //   console.log('You submitted:', formValues);
+  //   props.handleSubmit(formValues);
+  //   e.preventDefault();
+  // };
+
   const handleSubmit = e => {
     e.persist();
-    console.log('You submitted:', formValues);
-    props.handleSubmit(formValues);
+    formHandler(formValue);
     e.preventDefault();
+    setFormValues('');
   };
 
   return (
@@ -19,12 +26,10 @@ const Search = props => {
       <input
         className="search"
         type="text"
+        value={formValue}
         placeholder="Search restaurants by name, city, or genre!"
-        value={formValues}
-        name="search"
         onChange={handleChange}
       />
-      <input type="submit" value="Search!" />
     </form>
   );
 };

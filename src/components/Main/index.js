@@ -10,7 +10,7 @@ const Main = () => {
   const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
-  const [activeQuery, setActiveQuery] = useState('');
+  // const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const getRestaurants = async () => {
@@ -41,10 +41,28 @@ const Main = () => {
     }
   };
 
-  const handleSubmit = e => {
-    const { value } = e.target;
-    e.persist();
-    const normalizedValue = value.toLowerCase();
+  // const handleSubmit = e => {
+  //   const { value } = e.target;
+  //   e.persist();
+  //   const normalizedValue = value.toLowerCase();
+  // };
+
+  const formHandler = value => {
+    // console.log('logging search on front end:', value);
+    let normalizedValue = value.toLowerCase();
+    // const results = [];
+
+    const results = displayRestaurants.filter(place => {
+      let normalizedName = place.name.toLowerCase();
+
+      // console.log(`checking ${normalizedName} for ${normalizedValue}`);
+
+      if (normalizedName.includes(normalizedValue)) {
+        console.log('MATCH!', normalizedName);
+        return place;
+      }
+    });
+    console.log('RESULTS OF FILTER:', results);
   };
 
   const filterState = state => {
@@ -90,7 +108,7 @@ const Main = () => {
 
   return (
     <>
-      <Search handleSubmit={handleSubmit} />
+      <Search formHandler={formHandler} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />
