@@ -21,16 +21,18 @@ const Search = ({ formHandler, clearSearch }) => {
 
   return (
     <div className="search">
-      <form onSubmit={handleSubmit}>
-        <input
-          className="search-bar"
-          type="text"
-          value={formValue}
-          placeholder="Search restaurants by name, city, or genre!"
-          onChange={handleChange}
-        />
-      </form>
-      <button onClick={handleClear}>Clear</button>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="search-bar"
+            type="text"
+            value={formValue}
+            placeholder="Search restaurants by name, city, or genre!"
+            onChange={handleChange}
+          />
+        </form>
+        <button onClick={handleClear}>Clear</button>
+      </div>
     </div>
   );
 };

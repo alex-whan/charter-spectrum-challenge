@@ -20,12 +20,30 @@ table td {
 }
 
 .search-bar {
-  width: 40%;
-  margin: 1%;
+  padding: 1%;
+  width: 40vw;
+  max-width: 400px;
 }
 
-.search-bar > button {
-  display: inline;
+.search > button {
+  padding: 1%;
+  margin: 2%;
+}
+
+.search {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.search > div {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.search > div > form > input {
+  height: 60%;
 }
 
 select {
