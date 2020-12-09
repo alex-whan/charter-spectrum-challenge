@@ -26,7 +26,7 @@ const Search = ({ formHandler, clearSearch }) => {
         type="text"
         value={formValue}
         placeholder="Search restaurants by name, city, or genre!"
-        onChange={handleClear}
+        onChange={handleChange}
       />
       <button onClick={handleClear}>Clear</button>
     </form>
