@@ -53,12 +53,9 @@ const Main = () => {
   };
 
   const clearSearch = () => {
-    // setActiveState('');
-    // setActiveGenre('');
-    // setActiveQuery('');
-    // filterState(activeState);
-    // filterGenre(activeGenre);
-    // filterSearch(activeQuery);
+    setActiveState('');
+    setActiveGenre('');
+    setActiveQuery('');
   };
 
   // HOW DO WE GET THIS TO RESET PROPERLY?? NEED TO HANDLE THE 'ALL' SELECTION
@@ -101,13 +98,6 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    // let results = filterState(activeState);
-    // results = filterGenre(results, activeGenre);
-    // console.log('RESULTS??', results);
-    // filterState(activeState);
-    // filterGenre(activeGenre);
-    // filterSearch(activeQuery);
-    // setDisplayRestaurants(results);
     let result = restaurants.filter(filterState);
     result = result.filter(filterGenre);
     result = result.filter(filterSearch);
