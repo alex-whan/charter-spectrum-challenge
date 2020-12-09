@@ -52,24 +52,6 @@ const Main = () => {
     let normalizedValue = value.toLowerCase();
     // const results = [];
     setActiveQuery(normalizedValue);
-
-    const filtered = displayRestaurants.filter(place => {
-      let normalizedName = place.name.toLowerCase();
-      let normalizedCity = place.city.toLowerCase();
-      let normalizedGenre = place.genre.toLowerCase();
-
-      // console.log(`checking ${normalizedName} for ${normalizedValue}`);
-
-      if (
-        normalizedName.includes(normalizedValue) ||
-        normalizedCity.includes(normalizedValue) ||
-        normalizedGenre.includes(normalizedValue)
-      ) {
-        return place;
-      }
-    });
-    console.log('RESULTS OF FILTER:', filtered);
-    // setDisplayRestaurants(filtered);
   };
 
   const filterState = state => {
@@ -105,9 +87,21 @@ const Main = () => {
   };
 
   const filterSearch = query => {
-    // const filtered = restaurants.filter(restaurant => {
-    //   console.log();
-    // });
+    const filtered = displayRestaurants.filter(place => {
+      let normalizedName = place.name.toLowerCase();
+      let normalizedCity = place.city.toLowerCase();
+      let normalizedGenre = place.genre.toLowerCase();
+
+      if (
+        normalizedName.includes(query) ||
+        normalizedCity.includes(query) ||
+        normalizedGenre.includes(query)
+      ) {
+        return place;
+      }
+    });
+    console.log('RESULTS OF FILTER:', filtered);
+    setDisplayRestaurants(filtered);
   };
 
   useEffect(() => {
@@ -115,9 +109,18 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    filterState(activeState);
-    filterGenre(activeGenre);
-  }, [activeState, activeGenre]);
+    if (activeState) {
+      filterState(activeState);
+    }
+
+    if (activeGenre) {
+      filterGenre(activeGenre);
+    }
+
+    if (activeQuery) {
+      filterSearch(activeQuery);
+    }
+  }, [activeState, activeGenre, activeQuery]);
 
   return (
     <>
