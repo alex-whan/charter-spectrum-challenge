@@ -10,7 +10,7 @@ const Main = () => {
   const [displayRestaurants, setDisplayRestaurants] = useState([]);
   const [activeState, setActiveState] = useState('');
   const [activeGenre, setActiveGenre] = useState('');
-  // const [activeQuery, setActiveQuery] = useState('');
+  const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const getRestaurants = async () => {
@@ -51,18 +51,25 @@ const Main = () => {
     // console.log('logging search on front end:', value);
     let normalizedValue = value.toLowerCase();
     // const results = [];
+    setActiveQuery(normalizedValue);
 
-    const results = displayRestaurants.filter(place => {
+    const filtered = displayRestaurants.filter(place => {
       let normalizedName = place.name.toLowerCase();
+      let normalizedCity = place.city.toLowerCase();
+      let normalizedGenre = place.genre.toLowerCase();
 
       // console.log(`checking ${normalizedName} for ${normalizedValue}`);
 
-      if (normalizedName.includes(normalizedValue)) {
-        console.log('MATCH!', normalizedName);
+      if (
+        normalizedName.includes(normalizedValue) ||
+        normalizedCity.includes(normalizedValue) ||
+        normalizedGenre.includes(normalizedValue)
+      ) {
         return place;
       }
     });
-    console.log('RESULTS OF FILTER:', results);
+    console.log('RESULTS OF FILTER:', filtered);
+    // setDisplayRestaurants(filtered);
   };
 
   const filterState = state => {
@@ -95,6 +102,12 @@ const Main = () => {
       );
       setDisplayRestaurants(filtered);
     }
+  };
+
+  const filterSearch = query => {
+    // const filtered = restaurants.filter(restaurant => {
+    //   console.log();
+    // });
   };
 
   useEffect(() => {
