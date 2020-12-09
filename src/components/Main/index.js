@@ -13,6 +13,8 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log('ACTIVE QUERY:', activeQuery);
+
   const getRestaurants = async () => {
     setIsLoading(true);
     const response = await fetch(
