@@ -54,6 +54,10 @@ const Main = () => {
     setActiveQuery(normalizedValue);
   };
 
+  const clearSearch = () => {
+    setActiveQuery('');
+  };
+
   const filterState = state => {
     if (activeGenre) {
       const filtered = restaurants.filter(
@@ -87,7 +91,7 @@ const Main = () => {
   };
 
   const filterSearch = query => {
-    const filtered = displayRestaurants.filter(place => {
+    const filtered = restaurants.filter(place => {
       let normalizedName = place.name.toLowerCase();
       let normalizedCity = place.city.toLowerCase();
       let normalizedGenre = place.genre.toLowerCase();
@@ -124,7 +128,7 @@ const Main = () => {
 
   return (
     <>
-      <Search formHandler={formHandler} />
+      <Search formHandler={formHandler} clearSearch={clearSearch} />
       <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
       <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
       <Table props={displayRestaurants} />

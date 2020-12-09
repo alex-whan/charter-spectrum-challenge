@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Search = ({ formHandler }) => {
+const Search = ({ formHandler, clearSearch }) => {
   const [formValue, setFormValues] = useState('');
 
   const handleChange = e => {
@@ -30,6 +30,7 @@ const Search = ({ formHandler }) => {
         placeholder="Search restaurants by name, city, or genre!"
         onChange={handleChange}
       />
+      <button onClick={clearSearch}>Clear</button>
     </form>
   );
 };
