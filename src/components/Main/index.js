@@ -114,20 +114,22 @@ const Main = () => {
     const filtered = restaurants.filter(
       restaurant => restaurant.state === state
     );
-    console.log('FILTER STATE', filtered);
-    setDisplayRestaurants(filtered);
+    // console.log('FILTER STATE', filtered);
+    // setDisplayRestaurants(filtered);
+    return filtered;
   };
 
-  const filterGenre = genre => {
-    const filtered = restaurants.filter(restaurant =>
+  const filterGenre = (arr, genre) => {
+    const filtered = arr.filter(restaurant =>
       restaurant.genre.toLowerCase().includes(genre)
     );
-    console.log('FILTER GENRE', filtered);
-    setDisplayRestaurants(filtered);
+    // console.log('FILTER GENRE', filtered);
+    // setDisplayRestaurants(filtered);
+    return filtered;
   };
 
-  const filterSearch = query => {
-    const filtered = restaurants.filter(place => {
+  const filterSearch = (arr, query) => {
+    const filtered = displayRestaurants.filter(place => {
       let normalizedName = place.name.toLowerCase();
       let normalizedCity = place.city.toLowerCase();
       let normalizedGenre = place.genre.toLowerCase();
@@ -140,8 +142,9 @@ const Main = () => {
         return place;
       }
     });
-    console.log('FILTER SEARCH', filtered);
-    setDisplayRestaurants(filtered);
+    // console.log('FILTER SEARCH', filtered);
+    return filtered;
+    // setDisplayRestaurants(filtered);
   };
 
   useEffect(() => {
@@ -149,9 +152,12 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    filterState(activeState);
+    let results = filterState(activeState);
+    console.log('RESULTS??', results);
+    // filterState(activeState);
     // filterGenre(activeGenre);
     // filterSearch(activeQuery);
+    setDisplayRestaurants(results);
   }, [activeState, activeGenre, activeQuery]);
 
   return (
