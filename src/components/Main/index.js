@@ -4,6 +4,7 @@ import Dropdown from '../Dropdown';
 import Search from '../Search';
 import { STATES } from './constants/states';
 import { GENRES } from './constants/genres';
+import { act } from 'react-dom/test-utils';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -125,7 +126,11 @@ const Main = () => {
   };
 
   const filterGenre = restaurant => {
-    return restaurant.genre.toLowerCase().includes(activeGenre);
+    if (activeGenre) {
+      return restaurant.genre.toLowerCase().includes(activeGenre);
+    } else {
+      return restaurant;
+    }
     // const filtered = arr.filter(restaurant =>
     //   restaurant.genre.toLowerCase().includes(genre)
     // );
@@ -134,24 +139,41 @@ const Main = () => {
     // return filtered;
   };
 
-  const filterSearch = (arr, query) => {
-    const filtered = displayRestaurants.filter(place => {
-      let normalizedName = place.name.toLowerCase();
-      let normalizedCity = place.city.toLowerCase();
-      let normalizedGenre = place.genre.toLowerCase();
-
+  const filterSearch = restaurant => {
+    if (activeQuery) {
+      let normalizedName = restaurant.name.toLowerCase();
+      let normalizedCity = restaurant.city.toLowerCase();
+      let normalizedGenre = restaurant.genre.toLowerCase();
       if (
-        normalizedName.includes(query) ||
-        normalizedCity.includes(query) ||
-        normalizedGenre.includes(query)
+        normalizedName.includes(activeQuery) ||
+        normalizedCity.includes(activeQuery) ||
+        normalizedGenre.includes(activeQuery)
       ) {
-        return place;
+        return restaurant;
       }
-    });
-    // console.log('FILTER SEARCH', filtered);
-    return filtered;
-    // setDisplayRestaurants(filtered);
+    } else {
+      return restaurant;
+    }
   };
+
+  // const filterSearch = (arr, query) => {
+  //   const filtered = displayRestaurants.filter(place => {
+  //     let normalizedName = place.name.toLowerCase();
+  //     let normalizedCity = place.city.toLowerCase();
+  //     let normalizedGenre = place.genre.toLowerCase();
+
+  //     if (
+  //       normalizedName.includes(query) ||
+  //       normalizedCity.includes(query) ||
+  //       normalizedGenre.includes(query)
+  //     ) {
+  //       return place;
+  //     }
+  //   });
+  //   // console.log('FILTER SEARCH', filtered);
+  //   return filtered;
+  //   // setDisplayRestaurants(filtered);
+  // };
 
   useEffect(() => {
     getRestaurants();
@@ -167,6 +189,7 @@ const Main = () => {
     // setDisplayRestaurants(results);
     let result = restaurants.filter(filterState);
     result = result.filter(filterGenre);
+    result = result.filter(filterSearch);
     console.log('RES??', result);
     setDisplayRestaurants(result);
   }, [activeState, activeGenre, activeQuery]);
