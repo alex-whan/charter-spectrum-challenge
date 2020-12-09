@@ -7,13 +7,6 @@ const Search = ({ formHandler, clearSearch }) => {
     setFormValues(e.target.value);
   };
 
-  // const handleSubmit = e => {
-  //   e.persist();
-  //   console.log('You submitted:', formValues);
-  //   props.handleSubmit(formValues);
-  //   e.preventDefault();
-  // };
-
   const handleSubmit = e => {
     e.persist();
     formHandler(formValue);

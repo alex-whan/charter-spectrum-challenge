@@ -42,7 +42,7 @@ const Table = ({ props }) => {
                     {restaurant.city}, {restaurant.state}
                   </td>
                   <td>{restaurant.telephone}</td>
-                  <td>{restaurant.genre}</td>
+                  <td>{restaurant.genre.split(',').join(', ')}</td>
                 </tr>
               );
             })}

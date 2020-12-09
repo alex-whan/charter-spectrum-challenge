@@ -43,21 +43,14 @@ const Main = () => {
     }
   };
 
-  // const handleSubmit = e => {
-  //   const { value } = e.target;
-  //   e.persist();
-  //   const normalizedValue = value.toLowerCase();
-  // };
-
   const formHandler = value => {
-    // console.log('logging search on front end:', value);
     let normalizedValue = value.toLowerCase();
-    // const results = [];
     setActiveQuery(normalizedValue);
   };
 
   const clearSearch = () => {
     setActiveQuery('');
+    filterSearch(activeQuery);
   };
 
   const filterState = state => {
