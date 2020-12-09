@@ -52,12 +52,12 @@ const Main = () => {
   };
 
   const clearSearch = () => {
-    setActiveState('');
-    setActiveGenre('');
-    setActiveQuery('');
-    filterState(activeState);
-    filterGenre(activeGenre);
-    filterSearch(activeQuery);
+    // setActiveState('');
+    // setActiveGenre('');
+    // setActiveQuery('');
+    // filterState(activeState);
+    // filterGenre(activeGenre);
+    // filterSearch(activeQuery);
   };
 
   // const filterState = state => {
@@ -110,13 +110,12 @@ const Main = () => {
   //   setDisplayRestaurants(filtered);
   // };
 
-  const filterState = state => {
-    const filtered = restaurants.filter(
-      restaurant => restaurant.state === state
-    );
+  const filterState = restaurant => {
+    return restaurant.state === activeState;
+    // return restaurants.filter(restaurant => restaurant.state === state);
     // console.log('FILTER STATE', filtered);
     // setDisplayRestaurants(filtered);
-    return filtered;
+    // return filtered;
   };
 
   const filterGenre = (arr, genre) => {
@@ -152,12 +151,15 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    let results = filterState(activeState);
-    console.log('RESULTS??', results);
+    // let results = filterState(activeState);
+    // results = filterGenre(results, activeGenre);
+    // console.log('RESULTS??', results);
     // filterState(activeState);
     // filterGenre(activeGenre);
     // filterSearch(activeQuery);
-    setDisplayRestaurants(results);
+    // setDisplayRestaurants(results);
+    let result = restaurants.filter(filterState);
+    console.log('RES??', result);
   }, [activeState, activeGenre, activeQuery]);
 
   return (
