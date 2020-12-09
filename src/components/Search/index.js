@@ -16,7 +16,7 @@ const Search = ({ formHandler, clearSearch }) => {
 
   const handleClear = () => {
     clearSearch();
-    // setFormValues('');
+    setFormValues('');
   };
 
   return (
@@ -28,7 +28,7 @@ const Search = ({ formHandler, clearSearch }) => {
         placeholder="Search restaurants by name, city, or genre!"
         onChange={handleClear}
       />
-      <button onClick={clearSearch}>Clear</button>
+      <button onClick={handleClear}>Clear</button>
     </form>
   );
 };
