@@ -14,6 +14,11 @@ const Search = ({ formHandler, clearSearch }) => {
     setFormValues('');
   };
 
+  const handleClear = () => {
+    clearSearch();
+    // setFormValues('');
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -21,7 +26,7 @@ const Search = ({ formHandler, clearSearch }) => {
         type="text"
         value={formValue}
         placeholder="Search restaurants by name, city, or genre!"
-        onChange={handleChange}
+        onChange={handleClear}
       />
       <button onClick={clearSearch}>Clear</button>
     </form>

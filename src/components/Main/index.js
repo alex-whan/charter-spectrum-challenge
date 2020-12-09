@@ -4,7 +4,6 @@ import Dropdown from '../Dropdown';
 import Search from '../Search';
 import { STATES } from './constants/states';
 import { GENRES } from './constants/genres';
-import { act } from 'react-dom/test-utils';
 
 const Main = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -13,11 +12,6 @@ const Main = () => {
   const [activeGenre, setActiveGenre] = useState('');
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  // console.log('ACTIVE STATE:', activeState);
-  // console.log('ACTIVE GENRE:', activeGenre);
-  // console.log('ACTIVE QUERY:', activeQuery);
-  // console.log('CURRENT DISPLAY:', displayRestaurants);
 
   const getRestaurants = async () => {
     setIsLoading(true);
@@ -52,13 +46,12 @@ const Main = () => {
     setActiveQuery(normalizedValue);
   };
 
+  // HOW DO WE GET THIS TO RESET PROPERLY?? NEED TO HANDLE THE 'ALL' SELECTION
   const clearSearch = () => {
     setActiveState('');
     setActiveGenre('');
     setActiveQuery('');
   };
-
-  // HOW DO WE GET THIS TO RESET PROPERLY?? NEED TO HANDLE THE 'ALL' SELECTION
 
   const filterState = restaurant => {
     if (activeState) {
