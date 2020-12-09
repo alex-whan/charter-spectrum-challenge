@@ -11,7 +11,7 @@ const Search = ({ formHandler, clearSearch }) => {
     e.persist();
     formHandler(formValue);
     e.preventDefault();
-    setFormValues('');
+    // setFormValues('');
   };
 
   const handleClear = () => {
@@ -20,16 +20,18 @@ const Search = ({ formHandler, clearSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        className="search"
-        type="text"
-        value={formValue}
-        placeholder="Search restaurants by name, city, or genre!"
-        onChange={handleChange}
-      />
+    <div className="search">
+      <form onSubmit={handleSubmit}>
+        <input
+          className="search-bar"
+          type="text"
+          value={formValue}
+          placeholder="Search restaurants by name, city, or genre!"
+          onChange={handleChange}
+        />
+      </form>
       <button onClick={handleClear}>Clear</button>
-    </form>
+    </div>
   );
 };
 

@@ -19,9 +19,13 @@ table td {
   background-color: #494e5c;
 }
 
-.search {
-  width: 30%;
+.search-bar {
+  width: 40%;
   margin: 1%;
+}
+
+.search-bar > button {
+  display: inline;
 }
 
 select {

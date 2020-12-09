@@ -13,6 +13,8 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log('DISPLAYED:', displayRestaurants);
+
   const getRestaurants = async () => {
     setIsLoading(true);
     const response = await fetch(
@@ -101,8 +103,8 @@ const Main = () => {
   return (
     <>
       <Search formHandler={formHandler} clearSearch={clearSearch} />
-      <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
-      <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
+      <Dropdown name={'State'} opts={STATES} selectHandler={handleSelect} />
+      <Dropdown name={'Genre'} opts={GENRES} selectHandler={handleSelect} />
       <Table props={displayRestaurants} />
       <h2>{isLoading ? 'LOADING....' : ''}</h2>
     </>
