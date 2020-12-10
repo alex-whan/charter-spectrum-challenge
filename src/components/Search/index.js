@@ -11,7 +11,6 @@ const Search = ({ formHandler, clearSearch }) => {
     e.persist();
     formHandler(formValue);
     e.preventDefault();
-    // setFormValues('');
   };
 
   const handleClear = () => {

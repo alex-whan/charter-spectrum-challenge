@@ -48,7 +48,7 @@ table td {
 
 .search > div > form > input {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   line-height: 0.8em;
 }
 
@@ -56,7 +56,7 @@ select {
   text-transform: capitalize;
   margin: 1%;
   width: 10%;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .pagination {
