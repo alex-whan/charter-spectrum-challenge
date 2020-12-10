@@ -48,7 +48,6 @@ const Main = () => {
     setActiveQuery(normalizedValue);
   };
 
-  // HOW DO WE GET THIS TO RESET PROPERLY?? NEED TO HANDLE THE 'ALL' SELECTION
   const clearSearch = () => {
     setActiveState('');
     setActiveGenre('');
