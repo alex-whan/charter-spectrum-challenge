@@ -7,31 +7,32 @@ const Search = ({ formHandler, clearSearch }) => {
     setFormValues(e.target.value);
   };
 
-  // const handleSubmit = e => {
-  //   e.persist();
-  //   console.log('You submitted:', formValues);
-  //   props.handleSubmit(formValues);
-  //   e.preventDefault();
-  // };
-
   const handleSubmit = e => {
     e.persist();
     formHandler(formValue);
     e.preventDefault();
+  };
+
+  const handleClear = () => {
+    clearSearch();
     setFormValues('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        className="search"
-        type="text"
-        value={formValue}
-        placeholder="Search restaurants by name, city, or genre!"
-        onChange={handleChange}
-      />
-      <button onClick={clearSearch}>Clear</button>
-    </form>
+    <div className="search">
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="search-bar"
+            type="text"
+            value={formValue}
+            placeholder="Search restaurants by name, city, or genre!"
+            onChange={handleChange}
+          />
+        </form>
+        <button onClick={handleClear}>Clear</button>
+      </div>
+    </div>
   );
 };
 

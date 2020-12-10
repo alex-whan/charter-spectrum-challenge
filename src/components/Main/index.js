@@ -13,7 +13,7 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('ACTIVE QUERY:', activeQuery);
+  console.log('DISPLAYED:', displayRestaurants);
 
   const getRestaurants = async () => {
     setIsLoading(true);
@@ -43,71 +43,48 @@ const Main = () => {
     }
   };
 
-  // const handleSubmit = e => {
-  //   const { value } = e.target;
-  //   e.persist();
-  //   const normalizedValue = value.toLowerCase();
-  // };
-
   const formHandler = value => {
-    // console.log('logging search on front end:', value);
     let normalizedValue = value.toLowerCase();
-    // const results = [];
     setActiveQuery(normalizedValue);
   };
 
   const clearSearch = () => {
+    setActiveState('');
+    setActiveGenre('');
     setActiveQuery('');
   };
 
-  const filterState = state => {
-    if (activeGenre) {
-      const filtered = restaurants.filter(
-        restaurant =>
-          restaurant.state === state &&
-          restaurant.genre.toLowerCase().includes(activeGenre)
-      );
-      setDisplayRestaurants(filtered);
-    } else {
-      const filtered = restaurants.filter(
-        restaurant => restaurant.state === state
-      );
-      setDisplayRestaurants(filtered);
-    }
-  };
-
-  const filterGenre = genre => {
+  const filterState = restaurant => {
     if (activeState) {
-      const filtered = restaurants.filter(
-        restaurant =>
-          restaurant.genre.toLowerCase().includes(genre) &&
-          restaurant.state === activeState
-      );
-      setDisplayRestaurants(filtered);
+      return restaurant.state === activeState;
     } else {
-      const filtered = restaurants.filter(restaurant =>
-        restaurant.genre.toLowerCase().includes(genre)
-      );
-      setDisplayRestaurants(filtered);
+      return restaurant;
     }
   };
 
-  const filterSearch = query => {
-    const filtered = restaurants.filter(place => {
-      let normalizedName = place.name.toLowerCase();
-      let normalizedCity = place.city.toLowerCase();
-      let normalizedGenre = place.genre.toLowerCase();
+  const filterGenre = restaurant => {
+    if (activeGenre) {
+      return restaurant.genre.toLowerCase().includes(activeGenre);
+    } else {
+      return restaurant;
+    }
+  };
 
+  const filterSearch = restaurant => {
+    if (activeQuery) {
+      let normalizedName = restaurant.name.toLowerCase();
+      let normalizedCity = restaurant.city.toLowerCase();
+      let normalizedGenre = restaurant.genre.toLowerCase();
       if (
-        normalizedName.includes(query) ||
-        normalizedCity.includes(query) ||
-        normalizedGenre.includes(query)
+        normalizedName.includes(activeQuery) ||
+        normalizedCity.includes(activeQuery) ||
+        normalizedGenre.includes(activeQuery)
       ) {
-        return place;
+        return restaurant;
       }
-    });
-    console.log('RESULTS OF FILTER:', filtered);
-    setDisplayRestaurants(filtered);
+    } else {
+      return restaurant;
+    }
   };
 
   useEffect(() => {
@@ -115,24 +92,18 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (activeState) {
-      filterState(activeState);
-    }
-
-    if (activeGenre) {
-      filterGenre(activeGenre);
-    }
-
-    if (activeQuery) {
-      filterSearch(activeQuery);
-    }
+    let result = restaurants.filter(filterState);
+    result = result.filter(filterGenre);
+    result = result.filter(filterSearch);
+    console.log('RES??', result);
+    setDisplayRestaurants(result);
   }, [activeState, activeGenre, activeQuery]);
 
   return (
     <>
       <Search formHandler={formHandler} clearSearch={clearSearch} />
-      <Dropdown name={'State'} opts={STATES} handler={handleSelect} />
-      <Dropdown name={'Genre'} opts={GENRES} handler={handleSelect} />
+      <Dropdown name={'State'} opts={STATES} selectHandler={handleSelect} />
+      <Dropdown name={'Genre'} opts={GENRES} selectHandler={handleSelect} />
       <Table props={displayRestaurants} />
       <h2>{isLoading ? 'LOADING....' : ''}</h2>
     </>

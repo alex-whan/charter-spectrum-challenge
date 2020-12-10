@@ -8,7 +8,7 @@ const Dropdown = props => {
   return (
     <form>
       <label>Filter by {filterType}</label>
-      <select name={filterType} onChange={props.handler}>
+      <select name={filterType} onChange={props.selectHandler}>
         <option value="" defaultValue="">
           All
         </option>
