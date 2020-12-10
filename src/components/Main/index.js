@@ -13,8 +13,6 @@ const Main = () => {
   const [activeQuery, setActiveQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('DISPLAYED:', displayRestaurants);
-
   const getRestaurants = async () => {
     setIsLoading(true);
     const response = await fetch(
@@ -95,7 +93,6 @@ const Main = () => {
     let result = restaurants.filter(filterState);
     result = result.filter(filterGenre);
     result = result.filter(filterSearch);
-    console.log('RES??', result);
     setDisplayRestaurants(result);
   }, [activeState, activeGenre, activeQuery]);
 
